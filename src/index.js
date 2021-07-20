@@ -3,18 +3,12 @@ import ReactDOM from "react-dom";
 import "./index.css";
 
 class Squre extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      value: null,
-    };
-  }
   render() {
-    const { value } = this.state;
+		const {value, onClick} = this.props;
     return (
       <button 
 				className="square" 
-				onClick={() => this.setState({ value: "X" })}>
+				onClick={() => onClick()}>
         {value}
       </button>
     );
@@ -22,8 +16,27 @@ class Squre extends React.Component {
 }
 
 class Board extends React.Component {
+	constructor(props) {
+		super(props);
+		this.state = {
+			squares: Array(9).fill(null),
+		}
+	}
+
+	handleClick(i) {
+		const squares = this.state.squares.slice();// 사본 만들기
+		squares[i] = 'X';
+		this.setState({squares: squares});
+	}
+
   renderSqure(i) {
-    return <Squre value={i} />;
+		const {squares} = this.state;
+    return (
+			<Squre 
+				value={squares[i]}
+				onClick={() => this.handleClick(i)} 
+			/>
+		);
   }
 
   render() {
