@@ -2,17 +2,12 @@ import React from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
 
-class Squre extends React.Component {
-  render() {
-		const {value, onClick} = this.props;
-    return (
-      <button 
-				className="square" 
-				onClick={() => onClick()}>
-        {value}
-      </button>
-    );
-  }
+function Square({value, onClick}) {
+	return (
+		<button className="square" onClick={onClick}>
+			{value}
+		</button>
+	)
 }
 
 class Board extends React.Component {
@@ -32,7 +27,7 @@ class Board extends React.Component {
   renderSqure(i) {
 		const {squares} = this.state;
     return (
-			<Squre 
+			<Square 
 				value={squares[i]}
 				onClick={() => this.handleClick(i)} 
 			/>
